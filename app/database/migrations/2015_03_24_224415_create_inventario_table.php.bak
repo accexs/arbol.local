@@ -1,0 +1,54 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateInventarioTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		//
+		Schema::create('inventario',function($table)
+			{
+				//
+				$table->increments('id');
+				$table->integer('id_unidad');
+				$table->integer('id_bloque');
+				$table->integer('id_parcela');
+				$table->integer('id_especie');
+				$table->integer('id_arbol');
+				$table->string('ayudante',100)->nullable();
+				$table->string('responsable',100)->nullable();
+				$table->string('baqueano',100)->nullable();
+				/*$table->foreign('id_unidad')->references('id')->on('unidades')->onDelete('cascade')->onUpdate('cascade');
+				$table->foreign('id_bloque')->references('id')->on('bloques')->onDelete('cascade')->onUpdate('cascade');
+				$table->foreign('id_parcela')->references('id')->on('parcelas')->onDelete('cascade')->onUpdate('cascade');
+				$table->foreign('id_especie')->references('id')->on('especie')->onDelete('cascade')->onUpdate('cascade');
+				$table->foreign('id_arbol')->references('id')->on('arboles')->onDelete('cascade')->onUpdate('cascade');*/
+			});
+
+		Schema::table('unidades',function($table)
+			{
+				//
+				$table->integer('id_inventario');
+				//$table->foreign('id_inventario')->references('id_unidad')->on('inventario')->onDelete('cascade')->onUpdate('cascade');
+			});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		//
+		Schema::drop('inventario');
+	}
+
+}
